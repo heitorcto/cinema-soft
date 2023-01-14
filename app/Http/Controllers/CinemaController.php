@@ -12,7 +12,9 @@ class CinemaController extends Controller
     protected function registrar(Request $request)
     {
         $validar = Validator::make($request->all(), [
-            'nome' => 'string|min:3'
+            'estado' => 'required|string|min:3',
+            'cidade' => 'required|string|min:3',
+            'criado_em' => 'required|date'
         ]);
 
         if ($validar->fails()) {
