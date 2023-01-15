@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use \Illuminate\Http\JsonResponse;
 use App\Models\Administrador;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -16,9 +17,9 @@ class AdministradorController extends Controller
      * Método responsável por efetuar o registro do administrador.
      *
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    protected function registrar(Request $request): \Illuminate\Http\JsonResponse
+    protected function registrar(Request $request): JsonResponse
     {
         $validar = Validator::make($request->all(), [
             'nome' => 'required|max:100|min:3|string',
@@ -52,9 +53,9 @@ class AdministradorController extends Controller
      * Método responsável por efetuar o login do administrador utilizando o Sanctum.
      *
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    protected function logar(Request $request): \Illuminate\Http\JsonResponse
+    protected function logar(Request $request): JsonResponse
     {
         $validar = Validator::make($request->all(), [
             'email' => 'required|max:100|email:rfc,dns|string',
@@ -87,9 +88,9 @@ class AdministradorController extends Controller
      * Método responsável por efetuar a destruição do token da API e encerrar a sessão do administrador.
      *
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    protected function sair(Request $request): \Illuminate\Http\JsonResponse
+    protected function sair(Request $request): JsonResponse
     {
         $request->user()->tokens()->delete();
 

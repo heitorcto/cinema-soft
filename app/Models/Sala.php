@@ -5,17 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cinema extends Model
+class Sala extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
 
-    protected $table = 'cinemas';
+    protected $table = 'salas';
 
     protected $fillable = [
-        'estado',
-        'cidade',
-        'criado_em'
+        'sala',
+        'cinema_id'
     ];
 }

@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('cinemas', function (Blueprint $table) {
             $table->id();
-            $table->string('cidade', 100);
             $table->string('estado', 100);
+            $table->string('cidade', 100);
             $table->dateTime('criado_em');
         });
     }
