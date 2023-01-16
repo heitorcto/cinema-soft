@@ -11,6 +11,12 @@ use App\Models\Sala;
 
 class SalaController extends Controller
 {
+    /**
+     * Método responsável por registrar uma sala.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     protected function registrar(Request $request): JsonResponse
     {
         $validar = Validator::make($request->all(), [
@@ -34,6 +40,12 @@ class SalaController extends Controller
         ], 200);
     }
 
+    /**
+     * Método responsável por atualizar uma sala.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     protected function atualizar(Request $request): JsonResponse
     {
         $validar = Validator::make($request->all(), [
@@ -58,6 +70,12 @@ class SalaController extends Controller
         ], 200);
     }
 
+    /**
+     * Método responsável por excluir uma sala.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     protected function excluir(Request $request): JsonResponse
     {
         $validar = Validator::make($request->all(), [
@@ -78,6 +96,12 @@ class SalaController extends Controller
         ], 200);
     }
 
+    /**
+     * Método responsável por listar uma ou mais salas retornando uma paginação.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     protected function listar(Request $request): JsonResponse
     {
         if ($request->id) {

@@ -7,14 +7,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/registrar', [AdministradorController::class, "registrar"]);
 Route::post('/logar', [AdministradorController::class, "logar"]);
-Route::post('/sair', [AdministradorController::class, "sair"])->middleware('auth:sanctum');
 
-Route::post('/cinema/registrar', [CinemaController::class, "registrar"])->middleware('auth:sanctum');
-Route::post('/cinema/atualizar', [CinemaController::class, "atualizar"])->middleware('auth:sanctum');
-Route::get('/cinema/listar', [CinemaController::class, "listar"])->middleware('auth:sanctum');
-Route::delete('/cinema/excluir', [CinemaController::class, "excluir"])->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')->group(function () {
+    Route::prefix('cinema')->group(function () {
+        Route::post('/registrar', [CinemaController::class, "registrar"]);
+        Route::post('/atualizar', [CinemaController::class, "atualizar"]);
+        Route::get('/listar', [CinemaController::class, "listar"]);
+        Route::delete('/excluir', [CinemaController::class, "excluir"]);
+    });
 
-Route::post('/sala/registrar', [SalaController::class, "registrar"])->middleware('auth:sanctum');
-Route::post('/sala/atualizar', [SalaController::class, "atualizar"])->middleware('auth:sanctum');
-Route::get('/sala/listar', [SalaController::class, "listar"])->middleware('auth:sanctum');
-Route::delete('/sala/excluir', [SalaController::class, "excluir"])->middleware('auth:sanctum');
+    Route::prefix('cinema')->group(function () {
+        Route::post('/registrar', [SalaController::class, "registrar"]);
+        Route::post('/atualizar', [SalaController::class, "atualizar"]);
+        Route::get('/listar', [SalaController::class, "listar"]);
+        Route::delete('/excluir', [SalaController::class, "excluir"]);
+    });
+
+    Route::post('/sair', [AdministradorController::class, "sair"]);
+});
