@@ -25,3 +25,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/sair', [AdministradorController::class, "sair"]);
 });
+
+Route::get('/listar-react', [AdministradorController::class, "listarTeste"]);

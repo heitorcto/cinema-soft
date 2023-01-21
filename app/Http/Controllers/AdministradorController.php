@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use \Illuminate\Http\JsonResponse;
 use App\Models\Administrador;
+use App\Models\Cinema;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
@@ -21,7 +22,7 @@ class AdministradorController extends Controller
      */
     protected function registrar(Request $request): JsonResponse
     {
-        $validar = Validator::make($request->all(), [
+        $request->validate([
             'nome' => 'required|max:100|min:3|string',
             'email' => 'required|max:100|email:rfc,dns|string|unique:administradores,email',
             'senha' => 'required|max:20|min:5|string',
@@ -29,11 +30,23 @@ class AdministradorController extends Controller
             'nascimento' => 'required|date'
         ]);
 
-        if ($validar->fails()) {
-            return response()->json([
-                'mensagem' => $validar->errors(),
-            ], 406);
-        }
+        // $validar = Validator::make($request->all(), [
+        //     'nome' => 'required|max:100|min:3|string',
+        //     'email' => 'required|max:100|email:rfc,dns|string|unique:administradores,email',
+        //     'senha' => 'required|max:20|min:5|string',
+        //     'confirmar_senha' => 'required|max:20|min:3|same:senha|string',
+        //     'nascimento' => 'required|date'
+        // ]);
+
+        // if ($validar->fails()) {
+        //     return response()->json([
+        //         'mensagem' => $validar->errors(),
+        //     ], 406);
+        // }
+
+        // return response()->json([
+        //     'mensagem' => 'Teste'
+        // ], 200);
 
         $administrador = new Administrador;
         $administrador->nome = Str::ucfirst($request->nome);
@@ -97,5 +110,14 @@ class AdministradorController extends Controller
         return response()->json([
             'mensagem' => 'Deslogado com sucesso'
         ], 200);
+    }
+
+
+    protected function listarTeste()
+    {
+        $c = Cinema::all();
+        return response()->json([
+            $c
+        ]);
     }
 }
